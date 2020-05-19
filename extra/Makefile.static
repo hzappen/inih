@@ -5,7 +5,8 @@ OBJ = $(SRC:.c=.o)
 OUT = libinih.a
 INCLUDES = -I..
 CCFLAGS = -g -O2
-CC = g++
+CC = $(CROSS_COMPILE)g++
+AR = $(CROSS_COMPILE)ar
 
 default: $(OUT)
 
@@ -13,7 +14,7 @@ default: $(OUT)
 	$(CC) $(INCLUDES) $(CCFLAGS) $(EXTRACCFLAGS) -c $< -o $@
 
 $(OUT): $(OBJ)
-	ar rcs $(OUT) $(OBJ) $(EXTRAARFLAGS)
+	$(AR) rcs $(OUT) $(OBJ) $(EXTRAARFLAGS)
 
 clean:
 	rm -f $(OBJ) $(OUT)
